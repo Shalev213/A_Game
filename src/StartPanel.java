@@ -1,8 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowEvent;
+import java.awt.Window;
 
-public class MainWindow extends JPanel {
+public class StartPanel extends JPanel {
     public static final int ButtonWidth = 150;
     public static final int ButtonHeight = 100;
     public static final int Button_X = 425;
@@ -14,31 +14,26 @@ public class MainWindow extends JPanel {
     public static final int TitleHeight = 100;
     public static final int TitleFont = 50;
 
-    public MainWindow () {
+    public StartPanel() {
         this.setLayout(null);
-
-        JButton start =new JButton("Start");
-        start.setFont(new Font("Arial",Font.BOLD,ButtonFont));
+        this.setBackground(Color.cyan);
+        JButton start = new JButton("Start");
+        start.setFont(new Font("Arial", Font.BOLD, ButtonFont));
         start.setBounds(Button_X, Button_Y, ButtonWidth, ButtonHeight);
-
-        GameWindow gameWindow= new GameWindow();
-
-        start.addActionListener((e) -> {
-            Window window1= new Window();
-            window1.add(gameWindow);
-            window1.showWindow();
-//            this.setVisible(false);
-//            this.dispatchEvent(new WindowEvent(,WindowEvent.WINDOW_CLOSING));
-        });
-
-        JLabel title =new JLabel("Ball In The Air");
+        start.setOpaque(false);
+        start.setFocusable(false);
+        JLabel title = new JLabel("Ball In The Air");
         title.setBounds(Title_X, Title_Y, TitleWidth, TitleHeight);
-        title.setFont(new Font("Arial",Font.ITALIC,TitleFont));
+        title.setFont(new Font("Arial", Font.ITALIC, TitleFont));
         title.setForeground(Color.blue);
 
-
+        start.addActionListener((e) -> {
+            MainFrame.gamePanel.setVisible(true);
+            MainFrame.startPanel.setVisible(false);
+        });
         this.add(title);
         this.add(start);
+        this.setVisible(true);
     }
 
 }
