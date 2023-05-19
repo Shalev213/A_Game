@@ -20,7 +20,6 @@ public class StartPanel extends JPanel {
         JButton start = new JButton("Start");
         start.setFont(new Font("Arial", Font.BOLD, ButtonFont));
         start.setBounds(Button_X, Button_Y, ButtonWidth, ButtonHeight);
-        start.setOpaque(false);
         start.setFocusable(false);
         JLabel title = new JLabel("Ball In The Air");
         title.setBounds(Title_X, Title_Y, TitleWidth, TitleHeight);

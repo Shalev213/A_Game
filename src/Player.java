@@ -2,7 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Player {
-    private int x,y ;
+    private int x, y;
+    public static final int Width = 115;
+    public static final int Height = 145;
+
+    public Player(int x ,int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+
 
     public int getX() {
         return x;
@@ -20,11 +29,10 @@ public class Player {
         this.y = y;
     }
 
+
+
     public void paint(Graphics graphics) {
         ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\Downloads\\player-removebg-preview.png");
-//        imageIcon.paintIcon(null, graphics,50,50);
-        graphics.drawImage(imageIcon.getImage(), x,y, 200, 200, null);
-//        graphics.setColor(Color.black);
-//        graphics.fillOval(50,50,30,30);
+        graphics.drawImage(imageIcon.getImage(), x, y, Width, Height, null);
     }
 }
