@@ -29,6 +29,9 @@ public class StartPanel extends JPanel {
         start.addActionListener((e) -> {
             MainFrame.gamePanel.setVisible(true);
             MainFrame.startPanel.setVisible(false);
+            MainFrame.gamePanel.maimGameLoop();
+            this.requestFocus();
+
         });
         this.add(title);
         this.add(start);

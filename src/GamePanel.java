@@ -15,7 +15,6 @@ public class GamePanel extends JPanel implements KeyListener {
         this.addKeyListener(this);
         this.setFocusable(true);
         this.requestFocus();
-        this.maimGameLoop();
     }
 
     @Override
@@ -68,7 +67,7 @@ public class GamePanel extends JPanel implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        System.out.println("keyTyped");
+       System.out.println("keyTyped");
         switch (e.getKeyCode()) {
             case KeyEvent.VK_RIGHT:
                 this.player.setX(this.player.getX() + 2);

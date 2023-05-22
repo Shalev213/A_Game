@@ -32,7 +32,7 @@ public class Player {
 
 
     public void paint(Graphics graphics) {
-        ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\Downloads\\player-removebg-preview.png");
+        ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\OneDrive\\שולחן העבודה\\final player.png");
         graphics.drawImage(imageIcon.getImage(), x, y, Width, Height, null);
     }
 }
