@@ -13,6 +13,7 @@ public class StartPanel extends JPanel {
     public static final int TitleWidth = 320;
     public static final int TitleHeight = 100;
     public static final int TitleFont = 50;
+//    private Background background;
 
     public StartPanel() {
         this.setLayout(null);
@@ -31,11 +32,16 @@ public class StartPanel extends JPanel {
             MainFrame.startPanel.setVisible(false);
             MainFrame.gamePanel.maimGameLoop();
             this.requestFocus();
-
         });
         this.add(title);
         this.add(start);
         this.setVisible(true);
+
+
     }
+//    public void paintComponent(Graphics g) {
+//        super.paintComponent(g);
+//        this.background.paint(g);
+//    }
 
 }

@@ -31,7 +31,7 @@ public class Ball {
     public void paintComponent(Graphics g) {
 //        g.setColor(Color.black);
 //        g.fillOval(x, y, 50, 50);
-        ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\OneDrive\\שולחן העבודה\\ball-removebg-preview (1).png");
+        ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\IdeaProjects\\A_Game\\src\\ball-removebg-preview (1).png");
         g.drawImage(imageIcon.getImage(), x, y, Width, Height, null);
     }
 

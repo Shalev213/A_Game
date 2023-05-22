@@ -38,21 +38,20 @@ public class GamePanel extends JPanel implements KeyListener {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
+
             }
         }).start();
-
     }
 
     private void updateBall() {
         int x = ball.getX(), y = ball.getY();
-        boolean goingBack = false;
         if (MainFrame.WindowWidth - 50 > x) {
-            this.ball.setX(x + 4);
+            this.ball.setX(x + 9);
         } else {
             this.ball.setX(x - 4);
         }
         if (MainFrame.WindowHeight - 150 > y) {
-            this.ball.setY(y + 4);
+            this.ball.setY(y + 6);
         } else {
             this.ball.setY(y);
             this.ball.setX(x);
@@ -64,14 +63,24 @@ public class GamePanel extends JPanel implements KeyListener {
         }
     }
 
-
     @Override
     public void keyTyped(KeyEvent e) {
        System.out.println("keyTyped");
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        System.out.println("keyTyped");
+//        Integer movement = null;
+//        if (e.getKeyCode() == KeyEvent.VK_UP){
+//            movement = 1;
+//        }
         switch (e.getKeyCode()) {
             case KeyEvent.VK_RIGHT:
                 this.player.setX(this.player.getX() + 2);
                 System.out.println("right");
+                this.repaint();
                 break;
             case KeyEvent.VK_LEFT:
                 this.player.setX(this.player.getX() - 2);
@@ -80,12 +89,6 @@ public class GamePanel extends JPanel implements KeyListener {
                 this.player.setY(this.player.getY() + 2);
                 break;
         }
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        System.out.println("keyTyped");
-
     }
 
     @Override

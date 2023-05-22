@@ -12,6 +12,9 @@ public class Player {
     }
 
 
+    public void move(int up){
+        this.y += up;
+    }
 
     public int getX() {
         return x;
@@ -32,7 +35,7 @@ public class Player {
 
 
     public void paint(Graphics graphics) {
-        ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\OneDrive\\שולחן העבודה\\final player.png");
+        ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\IdeaProjects\\A_Game\\src\\player-removebg-preview.png");
         graphics.drawImage(imageIcon.getImage(), x, y, Width, Height, null);
     }
 }
