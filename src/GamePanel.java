@@ -33,7 +33,8 @@ public class GamePanel extends JPanel implements KeyListener {
                 repaint();
                 updateBall();
                 if (checkCollision()){
-                    this.ball.move(getX()-3, getY()-4);
+                    this.ball.setY(200);
+                    System.out.println(player.getX() + " " + player.getWidth()/2 +" " + ball.getX());
                 }
                 try {
                     Thread.sleep(30);
@@ -49,11 +50,17 @@ public class GamePanel extends JPanel implements KeyListener {
 
     private void updateBall() {
         int x = ball.getX(), y = ball.getY();
-        if (MainFrame.WindowWidth - 50 > x) {
-            this.ball.setX(x + 3);
-        } else {
-            this.ball.setX(x - 4);
+        if (ball.getX() < player.getX() && ball.getY()+30 == player.getY()){
+            this.ball.setX(x - 100);
+        }else if (ball.getX() > player.getX() && ball.getY() + 30 == player.getY()){
+            this.ball.setX(x + 100);
+
         }
+//        if (MainFrame.WindowWidth - 50 > x) {
+//            this.ball.setX(x + 3);
+//        } else {
+//            this.ball.setX(x - 4);
+//        }
         if (MainFrame.WindowHeight - 150 > y) {
             this.ball.setY(y + 2);
         } else {

@@ -3,17 +3,24 @@ import java.awt.*;
 
 public class Player {
     private int x, y;
+    private ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\IdeaProjects\\A_Game\\src\\Pictures\\player-removebg-preview.png");
+    private int width;
+
     public static final int Width = 115;
     public static final int Height = 145;
 
-    public Player(int x ,int y) {
+    public Player(int x ,int y ) {
         this.x = x;
         this.y = y;
+        this.width =imageIcon.getIconWidth();
     }
 
 
     public void move(int up){
         this.y += up;
+    }
+    public  int getWidth(){
+        return this.width;
     }
 
     public int getX() {
@@ -39,7 +46,7 @@ public class Player {
 
 
     public void paint(Graphics graphics) {
-        ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\IdeaProjects\\A_Game\\src\\Pictures\\player-removebg-preview.png");
+//        ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\IdeaProjects\\A_Game\\src\\Pictures\\player-removebg-preview.png");
         graphics.drawImage(imageIcon.getImage(), x, y, Width, Height, null);
     }
 }
