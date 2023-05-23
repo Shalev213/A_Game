@@ -31,11 +31,15 @@ public class Player {
     public void setY(int y) {
         this.y = y;
     }
+    public Rectangle calculateRectangle () {
+
+        return new Rectangle(this.x, this.y, Width/3 * 2, Height/2);
+    }
 
 
 
     public void paint(Graphics graphics) {
-        ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\IdeaProjects\\A_Game\\src\\player-removebg-preview.png");
+        ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\IdeaProjects\\A_Game\\src\\Pictures\\player-removebg-preview.png");
         graphics.drawImage(imageIcon.getImage(), x, y, Width, Height, null);
     }
 }
