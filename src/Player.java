@@ -47,8 +47,7 @@ public class Player {
         return new Rectangle(this.x , this.y, Width/3, Height/2);
     }
     public Rectangle calculateCenterRectangle () {
-
-        return new Rectangle(this.x + Width/3, this.y, Width/3, Height/2);
+        return new Rectangle(this.x + Width/3, this.y, Width/3, Height/3);
     }
 
 

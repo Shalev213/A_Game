@@ -24,14 +24,14 @@ public class GamePanel extends JPanel implements KeyListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(new Color(26, 226, 20, 224));
-        g.fillRect(0, MainFrame.WindowHeight - (MainFrame.WindowHeight / 6), MainFrame.WindowWidth, 70);
+        g.fillRect(0, MainFrame.WindowHeight - (MainFrame.WindowHeight / 6), MainFrame.WindowWidth, 64);
         this.player.paint(g);
         this.ball.paintComponent(g);
     }
 
     public void maimGameLoop() {
         new Thread(() -> {
-            while (ball.getY()+Ball.SIZE + 70 !=MainFrame.WindowHeight) {
+            while (ball.getY()+Ball.SIZE  != MainFrame.WindowHeight - (MainFrame.WindowHeight / 6)) {
                 if (!right){
                     this.ball.moveL();
                 }else {
@@ -92,7 +92,6 @@ public class GamePanel extends JPanel implements KeyListener {
             case KeyEvent.VK_RIGHT:
                 if (x < MainFrame.WindowWidth-Player.Width) {
                     this.player.setX(x + 6);
-//                    this.repaint();
                 }
                 break;
             case KeyEvent.VK_LEFT:
@@ -100,16 +99,10 @@ public class GamePanel extends JPanel implements KeyListener {
                     this.player.setX(x - 6);
                 }
                 break;
-//            case KeyEvent.VK_UP:
-//                this.player.setY(this.player.getY() - 5);
-//                break;
         }
     }
-
     @Override
     public void keyReleased(KeyEvent e) {
-
-
     }
     public boolean checkRightCollision() {
         boolean collision = false;
