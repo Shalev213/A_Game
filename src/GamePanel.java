@@ -6,8 +6,18 @@ import java.awt.event.KeyListener;
 public class GamePanel extends JPanel implements KeyListener {
     private final Player player;
     private final Ball ball;
+    private final int counterWidth = 170;
+    private final int counterHeight =30;
+    private JLabel points = new JLabel();
+    private JLabel gameOver = new JLabel("The ball fell");
     private boolean up = false;
     private boolean right = false;
+    private int counter = 0;
+    private int fast = 10;
+
+    private  int medium = 30;
+    private int slowly = 50;
+    private int speed = slowly;
 
 
     public GamePanel() {
@@ -18,6 +28,7 @@ public class GamePanel extends JPanel implements KeyListener {
         this.addKeyListener(this);
         this.setFocusable(true);
         this.requestFocus();
+
     }
 
     @Override
@@ -27,11 +38,21 @@ public class GamePanel extends JPanel implements KeyListener {
         g.fillRect(0, MainFrame.WindowHeight - (MainFrame.WindowHeight / 6), MainFrame.WindowWidth, 64);
         this.player.paint(g);
         this.ball.paintComponent(g);
+        points.setBounds(10,10, counterWidth,counterHeight);
+        points.setFont(new Font("Arial", Font.BOLD, 30));
+        this.add(points);
+//        JLabel points = new JLabel();
+//        points.setBounds(MainFrame.WindowWidth/2 - counterWidth/2, (MainFrame.WindowHeight/6)*5, counterWidth,counterHeight);
+
+        gameOver.setBounds(MainFrame.WindowWidth / 2 - 175, MainFrame.WindowHeight / 2 - 50, 350, 50);
+        gameOver.setFont(new Font("Arial", Font.PLAIN, 60));
+        gameOver.setForeground(new Color(235, 2, 2, 255));
     }
 
     public void maimGameLoop() {
         new Thread(() -> {
             while (ball.getY()+Ball.SIZE  != MainFrame.WindowHeight - (MainFrame.WindowHeight / 6)) {
+                points.setText("Points: " + String.valueOf(counter));
                 if (!right){
                     this.ball.moveL();
                 }else {
@@ -53,29 +74,38 @@ public class GamePanel extends JPanel implements KeyListener {
                 if (checkRightCollision()){
                     up = true;
                     right = true;
+                    counter ++;
                 }
                 if (checkLeftCollision()){
                     up = true;
                     right = false;
+                    counter++;
                 }
                 if (checkCenterCollision()){
                     up = true;
+//                    counter++;
+                }
+                if(counter >= 1 && counter < 3){
+                    speed = medium;
+                } else if (counter >= 3) {
+                    speed = fast;
                 }
                 repaint();
                 try {
-                    Thread.sleep(30);
+                    Thread.sleep(speed);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             }
-            JLabel label = new JLabel("The ball fell");
-            label.setBounds(MainFrame.WindowWidth / 2 - 175, MainFrame.WindowHeight / 2 - 50, 350, 50);
-            label.setFont(new Font("Arial", Font.PLAIN, 60));
-            label.setForeground(new Color(235, 2, 2, 255));
-            this.add(label);
+
+//            JLabel gameOver = new JLabel("The ball fell");
+//            gameOver.setBounds(MainFrame.WindowWidth / 2 - 175, MainFrame.WindowHeight / 2 - 50, 350, 50);
+//            gameOver.setFont(new Font("Arial", Font.PLAIN, 60));
+//            gameOver.setForeground(new Color(235, 2, 2, 255));
+            this.add(gameOver);
             this.repaint();
 
-            int currentX =player.getX();
+            int currentX = player.getX();
             while (true){
                 this.player.setX(currentX);
             }
