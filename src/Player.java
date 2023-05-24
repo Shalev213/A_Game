@@ -38,9 +38,17 @@ public class Player {
     public void setY(int y) {
         this.y = y;
     }
-    public Rectangle calculateRectangle () {
+    public Rectangle calculateRightRectangle () {
 
-        return new Rectangle(this.x, this.y, Width/3 * 2, Height/2);
+        return new Rectangle(this.x + (2 * (Width/3)), this.y, Width/3, Height/2);
+    }
+    public Rectangle calculateLeftRectangle () {
+
+        return new Rectangle(this.x , this.y, Width/3, Height/2);
+    }
+    public Rectangle calculateCenterRectangle () {
+
+        return new Rectangle(this.x + width/3, this.y, Width/3, Height/2);
     }
 
 

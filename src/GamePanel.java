@@ -33,7 +33,9 @@ public class GamePanel extends JPanel implements KeyListener {
                 repaint();
                 updateBall();
                 if (checkCollision()){
-                    this.ball.setY(200);
+                    System.out.println(player.getX() + " " + player.getWidth()/2 +" " + ball.getX());
+                    this.ball.setX(this.ball.getX()+20);
+                    this.ball.setY(this.ball.getX()-50);
                     System.out.println(player.getX() + " " + player.getWidth()/2 +" " + ball.getX());
                 }
                 try {
@@ -50,12 +52,12 @@ public class GamePanel extends JPanel implements KeyListener {
 
     private void updateBall() {
         int x = ball.getX(), y = ball.getY();
-        if (ball.getX() < player.getX() && ball.getY()+30 == player.getY()){
-            this.ball.setX(x - 100);
-        }else if (ball.getX() > player.getX() && ball.getY() + 30 == player.getY()){
-            this.ball.setX(x + 100);
-
-        }
+//        if (ball.getX() < player.getX() && ball.getY()+30 == player.getY()){
+//            this.ball.setX(x - 100);
+//        }else if (ball.getX() > player.getX() && ball.getY() + 30 == player.getY()){
+//            this.ball.setX(x + 100);
+//
+//        }
 //        if (MainFrame.WindowWidth - 50 > x) {
 //            this.ball.setX(x + 3);
 //        } else {
@@ -111,7 +113,7 @@ public class GamePanel extends JPanel implements KeyListener {
     }
     public boolean checkCollision() {
         boolean collision = false;
-        if (this.player.calculateRectangle().intersects(this.ball.calculateRectangle())) {
+        if (this.player.calculateRightRectangle().intersects(this.ball.calculateRectangle())) {
             collision = true;
         }
         return collision;
