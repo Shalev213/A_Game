@@ -6,6 +6,9 @@ import java.awt.event.KeyListener;
 public class GamePanel extends JPanel implements KeyListener {
     private final Player player;
     private final Ball ball;
+    private boolean up = false;
+    private boolean right = false;
+
 
     public GamePanel() {
         this.player = new Player(MainFrame.WindowWidth / 2 - Player.Width / 2,MainFrame.WindowHeight-220 );
@@ -29,23 +32,69 @@ public class GamePanel extends JPanel implements KeyListener {
 
     public void maimGameLoop() {
         new Thread(() -> {
-            while (true) {
-                repaint();
-                updateBall();
-                if (checkCollision()){
-                    System.out.println(player.getX() + " " + player.getWidth()/2 +" " + ball.getX());
-                    this.ball.setX(this.ball.getX()+20);
-                    this.ball.setY(this.ball.getX()-50);
-                    System.out.println(player.getX() + " " + player.getWidth()/2 +" " + ball.getX());
+            while (ball.getY()+Ball.SIZE + 70 !=MainFrame.WindowHeight) {
+                if (!right){
+                    this.ball.moveL();
+                }else {
+                    this.ball.moveR();
                 }
+                if (!up) {
+                    this.ball.moveD();
+                }else {
+                    this.ball.moveU();
+                }
+                if (ball.getY() == 0){
+                    up = false;
+                }
+                if (this.ball.getX() < MainFrame.WindowWidth && this.ball.getX() > 940){
+                    right = false;
+                } else if ( this.ball.getX() == 0) {
+                    right = true;
+                }
+//                updateBall();
+                if (checkRightCollision()){
+                    up = true;
+                    right = true;
+//                    System.out.println(player.getX() + " " + player.getWidth()/2 +" " + ball.getX());
+//                    this.ball.setX(this.ball.getX()+50);
+//                    this.ball.setY(this.ball.getY()-150);
+//                    System.out.println(player.getX() + " " + player.getWidth()/2 +" " + ball.getX());
+                }
+                if (checkLeftCollision()){
+                    up = true;
+                    right = false;
+
+//                    System.out.println(player.getX() + " " + player.getWidth()/2 +" " + ball.getX());
+//                    this.ball.setX(this.ball.getX() -50 );
+//                    this.ball.setY(this.ball.getY() -150);
+//                    System.out.println(player.getX() + " " + player.getWidth()/2 +" " + ball.getX());
+                }
+
+                if (checkCenterCollision()){
+                    up = true;
+//                    System.out.println(player.getX() + " " + player.getWidth()/2 +" " + ball.getX());
+//                    this.ball.setX(this.ball.getX());
+//                    this.ball.setY(this.ball.getY()-150);
+//                    System.out.println(player.getX() + " " + player.getWidth()/2 +" " + ball.getX());
+                }
+                repaint();
                 try {
                     Thread.sleep(30);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-//                if (checkCollision()){
+//                if (checkRightCollision()){
 //                    this.ball.move(getX()-3, getY()-4);
 //                }
+            }
+            JLabel label = new JLabel("The ball fell");
+            label.setBounds(MainFrame.WindowWidth / 2 - 175, MainFrame.WindowHeight / 2 - 50, 350, 50);
+            label.setFont(new Font("Arial", Font.PLAIN, 60));
+            label.setForeground(new Color(235, 2, 2, 255));
+            this.add(label);
+
+            while (true){
+                this.player.setX(300);
             }
         }).start();
     }
@@ -111,9 +160,23 @@ public class GamePanel extends JPanel implements KeyListener {
 
 
     }
-    public boolean checkCollision() {
+    public boolean checkRightCollision() {
         boolean collision = false;
         if (this.player.calculateRightRectangle().intersects(this.ball.calculateRectangle())) {
+            collision = true;
+        }
+        return collision;
+    }
+    public boolean checkLeftCollision() {
+        boolean collision = false;
+        if (this.player.calculateLeftRectangle().intersects(this.ball.calculateRectangle())) {
+            collision = true;
+        }
+        return collision;
+    }
+    public boolean checkCenterCollision() {
+        boolean collision = false;
+        if (this.player.calculateCenterRectangle().intersects(this.ball.calculateRectangle())) {
             collision = true;
         }
         return collision;

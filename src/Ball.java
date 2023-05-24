@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
 
 public class Ball {
     private int x, y;
@@ -10,6 +9,7 @@ public class Ball {
         this.x = x;
         this.y = y;
     }
+
 
 
     public int getX() {
@@ -27,10 +27,29 @@ public class Ball {
     public void setY(int y) {
         this.y = y;
     }
-    public void move(int x, int y){
-        this.x = x;
-        this.y = y;
+    public void moveR(){
+        if (x + SIZE < MainFrame.WindowWidth) {
+            this.x += 3;
+        }
     }
+    public void moveL(){
+        if (x > 0) {
+            this.x -= 3;
+        }
+    }
+    public void moveU(){
+        if (y > 0) {
+            this.y -= 3;
+        }
+    }
+    public void moveD(){
+        if (y + SIZE + 70 < MainFrame.WindowHeight) {
+            this.y += 3;
+        }
+    }
+
+
+
     public Rectangle calculateRectangle () {
         return new Rectangle(this.x, this.y, SIZE, SIZE/2);
     }
