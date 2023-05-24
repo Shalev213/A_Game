@@ -25,7 +25,6 @@ public class GamePanel extends JPanel implements KeyListener {
         super.paintComponent(g);
         g.setColor(new Color(26, 226, 20, 224));
         g.fillRect(0, MainFrame.WindowHeight - (MainFrame.WindowHeight / 6), MainFrame.WindowWidth, 70);
-//        this.player.setY(getY()+ 410);
         this.player.paint(g);
         this.ball.paintComponent(g);
     }
@@ -51,31 +50,16 @@ public class GamePanel extends JPanel implements KeyListener {
                 } else if ( this.ball.getX() == 0) {
                     right = true;
                 }
-//                updateBall();
                 if (checkRightCollision()){
                     up = true;
                     right = true;
-//                    System.out.println(player.getX() + " " + player.getWidth()/2 +" " + ball.getX());
-//                    this.ball.setX(this.ball.getX()+50);
-//                    this.ball.setY(this.ball.getY()-150);
-//                    System.out.println(player.getX() + " " + player.getWidth()/2 +" " + ball.getX());
                 }
                 if (checkLeftCollision()){
                     up = true;
                     right = false;
-
-//                    System.out.println(player.getX() + " " + player.getWidth()/2 +" " + ball.getX());
-//                    this.ball.setX(this.ball.getX() -50 );
-//                    this.ball.setY(this.ball.getY() -150);
-//                    System.out.println(player.getX() + " " + player.getWidth()/2 +" " + ball.getX());
                 }
-
                 if (checkCenterCollision()){
                     up = true;
-//                    System.out.println(player.getX() + " " + player.getWidth()/2 +" " + ball.getX());
-//                    this.ball.setX(this.ball.getX());
-//                    this.ball.setY(this.ball.getY()-150);
-//                    System.out.println(player.getX() + " " + player.getWidth()/2 +" " + ball.getX());
                 }
                 repaint();
                 try {
@@ -83,65 +67,32 @@ public class GamePanel extends JPanel implements KeyListener {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-//                if (checkRightCollision()){
-//                    this.ball.move(getX()-3, getY()-4);
-//                }
             }
             JLabel label = new JLabel("The ball fell");
             label.setBounds(MainFrame.WindowWidth / 2 - 175, MainFrame.WindowHeight / 2 - 50, 350, 50);
             label.setFont(new Font("Arial", Font.PLAIN, 60));
             label.setForeground(new Color(235, 2, 2, 255));
             this.add(label);
+            this.repaint();
 
+            int currentX =player.getX();
             while (true){
-                this.player.setX(300);
+                this.player.setX(currentX);
             }
         }).start();
     }
 
-    private void updateBall() {
-        int x = ball.getX(), y = ball.getY();
-//        if (ball.getX() < player.getX() && ball.getY()+30 == player.getY()){
-//            this.ball.setX(x - 100);
-//        }else if (ball.getX() > player.getX() && ball.getY() + 30 == player.getY()){
-//            this.ball.setX(x + 100);
-//
-//        }
-//        if (MainFrame.WindowWidth - 50 > x) {
-//            this.ball.setX(x + 3);
-//        } else {
-//            this.ball.setX(x - 4);
-//        }
-        if (MainFrame.WindowHeight - 150 > y) {
-            this.ball.setY(y + 2);
-        } else {
-            this.ball.setY(y);
-            this.ball.setX(x);
-            JLabel label = new JLabel("The ball fell");
-            label.setBounds(MainFrame.WindowWidth / 2 - 175, MainFrame.WindowHeight / 2 - 50, 350, 50);
-            label.setFont(new Font("Arial", Font.PLAIN, 60));
-            label.setForeground(new Color(235, 2, 2, 255));
-            this.add(label);
-        }
-    }
-
     @Override
     public void keyTyped(KeyEvent e) {
-       System.out.println("keyTyped");
-
     }
-
     @Override
     public void keyPressed(KeyEvent e) {
-//        System.out.println("keyTyped");
-        int x = player.getX(), y = player.getY();
-
+        int x = player.getX();
         switch (e.getKeyCode()) {
             case KeyEvent.VK_RIGHT:
                 if (x < MainFrame.WindowWidth-Player.Width) {
                     this.player.setX(x + 6);
-//                System.out.println("right");
-                    this.repaint();
+//                    this.repaint();
                 }
                 break;
             case KeyEvent.VK_LEFT:
@@ -149,9 +100,9 @@ public class GamePanel extends JPanel implements KeyListener {
                     this.player.setX(x - 6);
                 }
                 break;
-            case KeyEvent.VK_UP:
-                this.player.setY(this.player.getY() - 5);
-                break;
+//            case KeyEvent.VK_UP:
+//                this.player.setY(this.player.getY() - 5);
+//                break;
         }
     }
 
