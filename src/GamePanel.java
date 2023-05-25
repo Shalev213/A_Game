@@ -14,11 +14,9 @@ public class GamePanel extends JPanel implements KeyListener {
     private boolean right = false;
     private int counter = 0;
     private int fast = 10;
-
     private  int medium = 30;
     private int slowly = 50;
     private int speed = slowly;
-
 
     public GamePanel() {
         this.player = new Player(MainFrame.WindowWidth / 2 - Player.Width / 2,MainFrame.WindowHeight-220 );
@@ -28,7 +26,6 @@ public class GamePanel extends JPanel implements KeyListener {
         this.addKeyListener(this);
         this.setFocusable(true);
         this.requestFocus();
-
     }
 
     @Override
