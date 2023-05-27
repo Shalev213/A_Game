@@ -13,10 +13,10 @@ public class GamePanel extends JPanel implements KeyListener {
     private boolean up = false;
     private boolean right = false;
     private int counter = 0;
-    private int fast = 10;
+    private int fast = 18;
     private  int medium = 30;
-    private int slowly = 50;
-    private int speed = slowly;
+    private int slow = 45;
+    private int speed = slow;
 
     public GamePanel() {
         this.player = new Player(MainFrame.WindowWidth / 2 - Player.Width / 2,MainFrame.WindowHeight-220 );
@@ -72,8 +72,7 @@ public class GamePanel extends JPanel implements KeyListener {
                     up = true;
                     right = true;
                     counter ++;
-                }
-                if (checkLeftCollision()){
+                }else if (checkLeftCollision()){
                     up = true;
                     right = false;
                     counter++;
@@ -82,9 +81,9 @@ public class GamePanel extends JPanel implements KeyListener {
                     up = true;
 //                    counter++;
                 }
-                if(counter >= 1 && counter < 3){
+                if(counter >= 5 && counter < 10){
                     speed = medium;
-                } else if (counter >= 3) {
+                } else if (counter >= 10) {
                     speed = fast;
                 }
                 repaint();
@@ -94,11 +93,6 @@ public class GamePanel extends JPanel implements KeyListener {
                     throw new RuntimeException(e);
                 }
             }
-
-//            JLabel gameOver = new JLabel("The ball fell");
-//            gameOver.setBounds(MainFrame.WindowWidth / 2 - 175, MainFrame.WindowHeight / 2 - 50, 350, 50);
-//            gameOver.setFont(new Font("Arial", Font.PLAIN, 60));
-//            gameOver.setForeground(new Color(235, 2, 2, 255));
             this.add(gameOver);
             this.repaint();
 

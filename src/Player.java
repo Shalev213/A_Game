@@ -39,10 +39,10 @@ public class Player {
         this.y = y;
     }
     public Rectangle calculateRightRectangle () {
-        return new Rectangle(this.x + (2 * (Width/3)) + Width/15, this.y, Width/3, Height/8);
+        return new Rectangle(this.x + (2 * (Width/3)), this.y, Width/4, Height/8);
     }
     public Rectangle calculateLeftRectangle () {
-        return new Rectangle(this.x-Width/15 , this.y, Width/3, Height/8);
+        return new Rectangle(this.x , this.y, Width/3, Height/8);
     }
     public Rectangle calculateCenterRectangle () {
         return new Rectangle(this.x + Width/3, this.y, Width/3, Height/8);

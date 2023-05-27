@@ -54,8 +54,6 @@ public class Ball {
         return new Rectangle(this.x, this.y, SIZE, SIZE/2);
     }
 
-
-
     public void paintComponent(Graphics g) {
         ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\IdeaProjects\\A_Game\\src\\Pictures\\ball-removebg-preview (1).png");
         g.drawImage(imageIcon.getImage(), x, y, SIZE, SIZE, null);
