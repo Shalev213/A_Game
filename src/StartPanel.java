@@ -13,9 +13,11 @@ public class StartPanel extends JPanel {
     public static final int TitleWidth = 320;
     public static final int TitleHeight = 100;
     public static final int TitleFont = 50;
-//    private Background background;
+    private Image background;
 
     public StartPanel() {
+        background = new ImageIcon("src/Pictures/background2.jpg").getImage();
+
         this.setLayout(null);
         this.setBackground(Color.cyan);
         JButton start = new JButton("Start");
@@ -44,8 +46,8 @@ public class StartPanel extends JPanel {
         this.setVisible(true);
 
     }
-//    public void paintComponent(Graphics graphics) {
-//        super.paintComponent(graphics);
-//        this.background.paint(graphics);
-//    }
+    public void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
+        graphics.drawImage(background, 0, 0, null);
+    }
 }

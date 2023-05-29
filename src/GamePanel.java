@@ -18,6 +18,7 @@ public class GamePanel extends JPanel implements KeyListener {
     private int slow = 45;
     private int speed = slow;
 
+
     public GamePanel() {
         this.player = new Player(MainFrame.WindowWidth / 2 - Player.Width / 2,MainFrame.WindowHeight-220 );
         this.ball = new Ball(MainFrame.WindowWidth / 2 - 50,  MainFrame.WindowHeight / 3 - 50);
