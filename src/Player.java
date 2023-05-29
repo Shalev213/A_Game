@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class Player {
     private int x, y;
-    private ImageIcon imageIcon = new ImageIcon("src\\Pictures\\player-removebg-preview.png");
+    private ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\IdeaProjects\\A_Game\\src\\Pictures\\player-removebg-preview.png");
     private int width;
 
     public static final int Width = 115;
