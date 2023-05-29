@@ -13,9 +13,10 @@ public class GamePanel extends JPanel implements KeyListener {
     private boolean up = false;
     private boolean right = false;
     private int counter = 0;
-    private int fast = 18;
-    private  int medium = 30;
-    private int slow = 45;
+    private int veryFast = 7;
+    private int fast = 10;
+    private  int medium = 15;
+    private int slow = 25;
     private int speed = slow;
 
     public GamePanel() {
@@ -50,6 +51,7 @@ public class GamePanel extends JPanel implements KeyListener {
         new Thread(() -> {
             while (ball.getY()+Ball.SIZE  != MainFrame.WindowHeight - (MainFrame.WindowHeight / 6)) {
                 points.setText("Points: " + String.valueOf(counter));
+                this.repaint();
                 if (!right){
                     this.ball.moveL();
                 }else {
@@ -83,8 +85,10 @@ public class GamePanel extends JPanel implements KeyListener {
                 }
                 if(counter >= 5 && counter < 10){
                     speed = medium;
-                } else if (counter >= 10) {
+                } else if (counter >= 10 && counter < 15) {
                     speed = fast;
+                } else if (counter >= 15) {
+                    speed = veryFast;
                 }
                 repaint();
                 try {
@@ -112,12 +116,12 @@ public class GamePanel extends JPanel implements KeyListener {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_RIGHT:
                 if (x < MainFrame.WindowWidth-Player.Width) {
-                    this.player.setX(x + 6);
+                    this.player.setX(x + 16);
                 }
                 break;
             case KeyEvent.VK_LEFT:
                 if (x > 0) {
-                    this.player.setX(x - 6);
+                    this.player.setX(x - 16 );
                 }
                 break;
         }

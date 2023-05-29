@@ -55,7 +55,7 @@ public class Ball {
     }
 
     public void paintComponent(Graphics g) {
-        ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\IdeaProjects\\A_Game\\src\\Pictures\\ball-removebg-preview (1).png");
+        ImageIcon imageIcon = new ImageIcon("src\\Pictures\\ball-removebg-preview (1).png");
         g.drawImage(imageIcon.getImage(), x, y, SIZE, SIZE, null);
     }
 }
