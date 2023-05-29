@@ -6,7 +6,7 @@ public class MainFrame extends JFrame {
     public static final int WindowHeight = 600;
     public MainFrame(){
         this.setResizable(false);
-        this.setSize(WindowWidth,WindowHeight);
+        this.setSize(WindowWidth,WindowHeight); 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("BAll");
         this.setLocationRelativeTo(null);
@@ -16,7 +16,7 @@ public class MainFrame extends JFrame {
         this.getContentPane().add(gamePanel);
         this.getContentPane().add(startPanel);
     }
-    public void showWindow(){
+    public void MainFrame(){
         this.setVisible(true);
     }
 }
