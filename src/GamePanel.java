@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 
 public class GamePanel extends JPanel implements KeyListener {
     private final Player player;
@@ -19,6 +20,7 @@ public class GamePanel extends JPanel implements KeyListener {
     private int slow = 25;
     private int speed = slow;
     private Image backgroundImage;
+    private BackgroundSound backgroundSound;
 
 
     public GamePanel() {
@@ -53,9 +55,15 @@ public class GamePanel extends JPanel implements KeyListener {
     }
 
     public void maimGameLoop() {
+//        boolean colusion = false;
         new Thread(() -> {
+            int collisionCounter = 0;
+
             while (ball.getY()+Ball.SIZE  != MainFrame.WindowHeight - (MainFrame.WindowHeight / 6)) {
                 points.setText("Points: " + String.valueOf(counter));
+                if (ball.getY() == 0){
+                    collisionCounter = 0;
+                }
                 if (!right){
                     this.ball.moveL();
                 }else {
@@ -77,11 +85,20 @@ public class GamePanel extends JPanel implements KeyListener {
                 if (checkRightCollision()){
                     up = true;
                     right = true;
-                    counter ++;
+                    collisionCounter++;
+                    System.out.println(collisionCounter);
+                    if (collisionCounter == 1){
+                        counter++;
+                    }
+
                 }else if (checkLeftCollision()){
                     up = true;
                     right = false;
-                    counter++;
+                    collisionCounter++;
+                    System.out.println(collisionCounter);
+                    if (collisionCounter == 1){
+                        counter++;
+                    }
                 }
                 if (checkCenterCollision()){
                     up = true;
