@@ -13,10 +13,12 @@ public class GamePanel extends JPanel implements KeyListener {
     private boolean up = false;
     private boolean right = false;
     private int counter = 0;
-    private int fast = 18;
-    private  int medium = 30;
-    private int slow = 45;
+    private int veryFast = 7;
+    private int fast = 10;
+    private  int medium = 15;
+    private int slow = 25;
     private int speed = slow;
+    private Image backgroundImage;
 
 
     public GamePanel() {
@@ -32,12 +34,15 @@ public class GamePanel extends JPanel implements KeyListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        this.backgroundImage = Toolkit.getDefaultToolkit().getImage("src\\Pictures\\רקע למשחק.jpg");
+        g.drawImage(backgroundImage, 0, 0, getWidth() , getHeight() , this);
         g.setColor(new Color(26, 226, 20, 224));
-        g.fillRect(0, MainFrame.WindowHeight - (MainFrame.WindowHeight / 6), MainFrame.WindowWidth, 64);
+//        g.fillRect(0, MainFrame.WindowHeight - (MainFrame.WindowHeight / 6), MainFrame.WindowWidth, 64);
         this.player.paint(g);
         this.ball.paintComponent(g);
         points.setBounds(10,10, counterWidth,counterHeight);
         points.setFont(new Font("Arial", Font.BOLD, 30));
+        points.setForeground(Color.CYAN);
         this.add(points);
 //        JLabel points = new JLabel();
 //        points.setBounds(MainFrame.WindowWidth/2 - counterWidth/2, (MainFrame.WindowHeight/6)*5, counterWidth,counterHeight);
@@ -84,8 +89,10 @@ public class GamePanel extends JPanel implements KeyListener {
                 }
                 if(counter >= 5 && counter < 10){
                     speed = medium;
-                } else if (counter >= 10) {
+                } else if (counter >= 10 && counter < 15) {
                     speed = fast;
+                } else if (counter >= 15) {
+                    speed = veryFast;
                 }
                 repaint();
                 try {
@@ -113,12 +120,12 @@ public class GamePanel extends JPanel implements KeyListener {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_RIGHT:
                 if (x < MainFrame.WindowWidth-Player.Width) {
-                    this.player.setX(x + 6);
+                    this.player.setX(x + 16);
                 }
                 break;
             case KeyEvent.VK_LEFT:
                 if (x > 0) {
-                    this.player.setX(x - 6);
+                    this.player.setX(x - 16);
                 }
                 break;
         }
