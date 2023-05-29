@@ -8,7 +8,7 @@ public class MainFrame extends JFrame {
         this.setResizable(false);
         this.setSize(WindowWidth,WindowHeight); 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setTitle("BAll");
+        this.setTitle("Ball In The Air");
         this.setLocationRelativeTo(null);
          startPanel = new StartPanel();
          gamePanel = new GamePanel();
