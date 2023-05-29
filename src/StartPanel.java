@@ -31,7 +31,7 @@ public class StartPanel extends JPanel {
         JLabel instructions = new JLabel("<html>Welcome to our game!!!<br>The target of our game is: don't let the ball fall by using <br> the left and right keys to make Messi move.<br>~Every touch of the ball is a point! <br>  Click 'Start' to start the game");
         instructions.setBounds(Title_X / 4, Title_Y * 5, TitleWidth * 4, TitleHeight*2);
         instructions.setFont(new Font("Arial", Font.ITALIC, TitleFont*2/3));
-        instructions.setForeground(new Color(0xE00A33C3, true));
+        instructions.setForeground(new Color(0xE011E7E3, true));
 
         start.addActionListener((e) -> {
             MainFrame.gamePanel.setVisible(true);
