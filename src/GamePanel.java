@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
+
 
 public class GamePanel extends JPanel implements KeyListener {
     private final Player player;
@@ -11,6 +11,7 @@ public class GamePanel extends JPanel implements KeyListener {
     private final int counterHeight =30;
     private JLabel points = new JLabel();
     private JLabel gameOver = new JLabel("The ball fell");
+    private boolean ballFell = false;
     private boolean up = false;
     private boolean right = false;
     private int counter = 0;
@@ -19,6 +20,7 @@ public class GamePanel extends JPanel implements KeyListener {
     private  int medium = 15;
     private int slow = 25;
     private int speed = slow;
+    private int pointLocation = 10;
     private Image backgroundImage;
     private BackgroundSound backgroundSound;
 
@@ -36,18 +38,17 @@ public class GamePanel extends JPanel implements KeyListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        this.backgroundImage = Toolkit.getDefaultToolkit().getImage("src\\Pictures\\רקע למשחק.jpg");
+        this.backgroundImage = Toolkit.getDefaultToolkit().getImage("src\\Pictures\\background1.jpg");
         g.drawImage(backgroundImage, 0, 0, getWidth() , getHeight() , this);
         g.setColor(new Color(26, 226, 20, 224));
-//        g.fillRect(0, MainFrame.WindowHeight - (MainFrame.WindowHeight / 6), MainFrame.WindowWidth, 64);
+
         this.player.paint(g);
         this.ball.paintComponent(g);
-        points.setBounds(10,10, counterWidth,counterHeight);
+        points.setBounds(pointLocation,pointLocation, counterWidth,counterHeight);
         points.setFont(new Font("Arial", Font.BOLD, 30));
         points.setForeground(Color.CYAN);
         this.add(points);
-//        JLabel points = new JLabel();
-//        points.setBounds(MainFrame.WindowWidth/2 - counterWidth/2, (MainFrame.WindowHeight/6)*5, counterWidth,counterHeight);
+
 
         gameOver.setBounds(MainFrame.WindowWidth / 2 - 175, MainFrame.WindowHeight / 2 - 50, 350, 50);
         gameOver.setFont(new Font("Arial", Font.PLAIN, 60));
@@ -55,11 +56,10 @@ public class GamePanel extends JPanel implements KeyListener {
     }
 
     public void maimGameLoop() {
-//        boolean colusion = false;
         new Thread(() -> {
             int collisionCounter = 0;
 
-            while (ball.getY()+Ball.SIZE  != MainFrame.WindowHeight - (MainFrame.WindowHeight / 6)) {
+            while (ball.getY()+ball.getSize()  != MainFrame.WindowHeight - (MainFrame.WindowHeight / 6)) {
                 points.setText("Points: " + String.valueOf(counter));
                 if (ball.getY() == 0){
                     collisionCounter = 0;
@@ -86,7 +86,6 @@ public class GamePanel extends JPanel implements KeyListener {
                     up = true;
                     right = true;
                     collisionCounter++;
-                    System.out.println(collisionCounter);
                     if (collisionCounter == 1){
                         counter++;
                     }
@@ -95,14 +94,12 @@ public class GamePanel extends JPanel implements KeyListener {
                     up = true;
                     right = false;
                     collisionCounter++;
-                    System.out.println(collisionCounter);
                     if (collisionCounter == 1){
                         counter++;
                     }
                 }
                 if (checkCenterCollision()){
                     up = true;
-//                    counter++;
                 }
                 if(counter >= 5 && counter < 10){
                     speed = medium;
@@ -118,6 +115,7 @@ public class GamePanel extends JPanel implements KeyListener {
                     throw new RuntimeException(e);
                 }
             }
+            this.ballFell = true;
             this.add(gameOver);
             this.repaint();
 
@@ -170,5 +168,8 @@ public class GamePanel extends JPanel implements KeyListener {
             collision = true;
         }
         return collision;
+    }
+    public boolean isBallFell(){
+        return ballFell;
     }
 }

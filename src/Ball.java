@@ -3,14 +3,12 @@ import java.awt.*;
 
 public class Ball {
     private int x, y;
-    public static final int SIZE = 50;
+    private final int size = 50;
 
     public Ball(int x, int y) {
         this.x = x;
         this.y = y;
     }
-
-
 
     public int getX() {
         return x;
@@ -27,8 +25,13 @@ public class Ball {
     public void setY(int y) {
         this.y = y;
     }
+
+    public int getSize() {
+        return size;
+    }
+
     public void moveR(){
-        if (x + SIZE < MainFrame.WindowWidth) {
+        if (x + size < MainFrame.WindowWidth) {
             this.x += 3;
         }
     }
@@ -43,19 +46,17 @@ public class Ball {
         }
     }
     public void moveD(){
-        if (y + SIZE + 70 < MainFrame.WindowHeight) {
+        if (y + size + 70 < MainFrame.WindowHeight) {
             this.y += 3;
         }
     }
 
-
-
     public Rectangle calculateRectangle () {
-        return new Rectangle(this.x, this.y, SIZE, SIZE/2);
+        return new Rectangle(this.x, this.y, size, size /2);
     }
 
     public void paintComponent(Graphics g) {
         ImageIcon imageIcon = new ImageIcon("src\\Pictures\\ball-removebg-preview (1).png");
-        g.drawImage(imageIcon.getImage(), x, y, SIZE, SIZE, null);
+        g.drawImage(imageIcon.getImage(), x, y, size, size, null);
     }
 }

@@ -1,6 +1,8 @@
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Window;
+import java.io.IOException;
 
 public class StartPanel extends JPanel {
     public static final int ButtonWidth = 150;
@@ -14,26 +16,45 @@ public class StartPanel extends JPanel {
     public static final int TitleHeight = 100;
     public static final int TitleFont = 50;
     private Image background;
+    private BackgroundSound backgroundSound;
 
-    public StartPanel() {
+    public StartPanel() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        this.backgroundSound = new BackgroundSound();
         background = new ImageIcon("src/Pictures/background2.jpg").getImage();
-
         this.setLayout(null);
-        this.setBackground(Color.cyan);
+
         JButton start = new JButton("Start");
         start.setFont(new Font("Arial", Font.BOLD, ButtonFont));
         start.setBounds(Button_X, Button_Y, ButtonWidth, ButtonHeight);
         start.setFocusable(false);
+
         JLabel title = new JLabel("Ball In The Air");
         title.setBounds(Title_X, Title_Y, TitleWidth, TitleHeight);
         title.setFont(new Font("Arial", Font.ITALIC, TitleFont));
         title.setForeground(Color.blue);
+
         JLabel instructions = new JLabel("<html>Welcome to our game!!!<br>The target of our game is: don't let the ball fall by using <br> the left and right keys to make Messi move.<br>~Every touch of the ball is a point! <br>  Click 'Start' to start the game");
         instructions.setBounds(Title_X / 4, Title_Y * 5, TitleWidth * 4, TitleHeight*2);
         instructions.setFont(new Font("Arial", Font.ITALIC, TitleFont*2/3));
         instructions.setForeground(new Color(0xE011E7E3, true));
 
         start.addActionListener((e) -> {
+            this.backgroundSound.playMusic();
+            MainFrame.gamePanel.setVisible(true);
+            new Thread(()->{
+                while (true){
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    if (MainFrame.gamePanel.isBallFell()){
+                        this.backgroundSound.stopMusic();
+                        break;
+                    }
+                }
+            }).start();
+
             MainFrame.gamePanel.setVisible(true);
             MainFrame.startPanel.setVisible(false);
             MainFrame.gamePanel.maimGameLoop();
@@ -44,7 +65,6 @@ public class StartPanel extends JPanel {
         this.add(instructions);
         this.add(start);
         this.setVisible(true);
-
     }
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
